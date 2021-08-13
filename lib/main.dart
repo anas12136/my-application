@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget{
             primaryTextTheme: GoogleFonts.lateefTextTheme(),
 
           ),
+          initialRoute: MyRoutes.homeRoute,
           routes: {
             "/": (context) => LoginPage(),
             MyRoutes.homeRoute:(context) => HomePage(),

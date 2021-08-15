@@ -19,10 +19,13 @@ class MyDrawer extends StatelessWidget{
 
                 padding: EdgeInsets.zero,
                 child: UserAccountsDrawerHeader(
+
                 margin: EdgeInsets.zero,
 
                 accountName:Text (
                   "Anas Sattar Kaarwa",
+                  style: TextStyle (color: Colors.white),
+
                   textScaleFactor: 1.8,
 
 
@@ -36,6 +39,7 @@ class MyDrawer extends StatelessWidget{
                 ),
 
                 currentAccountPicture: CircleAvatar(
+
                   backgroundImage: NetworkImage(imageurl),
                 ),
 

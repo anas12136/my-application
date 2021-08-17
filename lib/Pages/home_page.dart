@@ -1,9 +1,13 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+ import 'package:flutter/services.dart';
 import 'package:git_project_2/Models/catlog.dart';
-import 'package:git_project_2/Widgets/drawer.dart';
-import 'package:git_project_2/Widgets/item_widget.dart';
+ //import 'package:git_project_2/Widgets/drawer.dart';
+// import 'package:git_project_2/Widgets/item_widget.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:velocity_x/src/flutter/text.dart';
+import 'package:flutter/src/painting/text_style.dart';
 
 
 class HomePage extends StatefulWidget{
@@ -40,57 +44,82 @@ await Future.delayed(Duration (seconds: 2));
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-      appBar: AppBar(
-        title: Text('Catlog App'),
-      ),
+    backgroundColor: Colors.grey,
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CatlogHeader(),
+              if(CatlogModel.items!=null && CatlogModel.items.isNotEmpty)
+                CatlogList().expand()
+              else
+                Center(child:
+                CircularProgressIndicator(),
+    )
 
-    body:Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ( CatlogModel.items != null && CatlogModel.items.isNotEmpty)
-          ?GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-        itemCount: CatlogModel.items.length,
-        itemBuilder: (context, index){
-         final item= CatlogModel.items[index];
-            return Card(
-
-              child: GridTile(
-           header:
-
-           Container(
-               child: Text(
-                 item.name,
-                 style: TextStyle(
-                     color: Colors.white,
-                 ),
-                 
-                 
-               ),
-             padding: const EdgeInsets.all(12),
-             decoration: BoxDecoration(
-               color: Colors.deepPurple,
-             ),
-           ), child: Image.network(item.image,),
-                footer: Container
-                  (
-                  child: Text(
-                    item.price.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(color: Colors.black,),
-                ),
-         ),
-            );
-        },
+            ],
+  ),
+        ),
       )
-          : Center(
-        child: CircularProgressIndicator(color: Colors.deepPurple),
-      ),
-    ),
-      drawer: MyDrawer(),
+  );
 
+
+  }
+}
+class CatlogList extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+
+    return ListView.builder(
+      shrinkWrap: true,
+
+      itemCount: CatlogModel.items.length,
+      itemBuilder:(context, index) {
+        final catlog = CatlogModel.items[index];
+        return CatlogItem(catlog: catlog);
+      },
+    );
+  }
+}
+class CatlogItem extends StatelessWidget{
+  final Item catlog;
+
+  const CatlogItem({Key? key, required this.catlog}) :assert(catlog!=null), super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    return VxBox(
+      child: Row(
+        children: [
+          Image.network(catlog.image).box.roundedLg.color(Colors.grey).py32.make().p16().w32(context),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catlog.name.text.lg.color(Colors.black).bold.make(),
+              catlog.desc.text.make()
+            ],
+          ))
+        ],
+
+      ),
+    ).white.roundedLg.square(120).make().py32();
+  }
+}
+class CatlogHeader extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+     children: [
+       "CatlogApp".text.xl5.bold.color(Colors.blue).make(),
+       "Trending Products".text.xl2.color(Colors.black).make(),
+
+
+     ],
 
     );
   }

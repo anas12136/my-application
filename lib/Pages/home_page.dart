@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
   loadData()async{
-   await Future.delayed(Duration(seconds: 2));
+await Future.delayed(Duration (seconds: 2));
 
 
   final catlogJson =  await rootBundle.loadString("assets/files/catlog.json");
@@ -46,17 +46,47 @@ class _HomePageState extends State<HomePage> {
 
     body:Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ( CatlogModel.items != null && CatlogModel.items.isNotEmpty)?
-      ListView.builder(
+      child: ( CatlogModel.items != null && CatlogModel.items.isNotEmpty)
+          ?GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
         itemCount: CatlogModel.items.length,
         itemBuilder: (context, index){
-         return ItemWidget(
-           item: CatlogModel.items[index],
-         );
+         final item= CatlogModel.items[index];
+            return Card(
+
+              child: GridTile(
+           header:
+
+           Container(
+               child: Text(
+                 item.name,
+                 style: TextStyle(
+                     color: Colors.white,
+                 ),
+                 
+                 
+               ),
+             padding: const EdgeInsets.all(12),
+             decoration: BoxDecoration(
+               color: Colors.deepPurple,
+             ),
+           ), child: Image.network(item.image,),
+                footer: Container
+                  (
+                  child: Text(
+                    item.price.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(color: Colors.black,),
+                ),
+         ),
+            );
         },
       )
           : Center(
-        child: CircularProgressIndicator(color: Colors.deepPurple,),
+        child: CircularProgressIndicator(color: Colors.deepPurple),
       ),
     ),
       drawer: MyDrawer(),

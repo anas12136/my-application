@@ -1,11 +1,13 @@
+import 'package:git_project_2/Models/Product.dart';
+
 class Item {
     List<Product> products;
 
-    Item({this.products});
+    Item({required this.products});
 
     factory Item.fromJson(Map<String, dynamic> json) {
         return Item(
-            products: json['products'] != null ? (json['products'] as List).map((i) => Product.fromJson(i)).toList() : null, 
+            products: json['products'] != null ? (json['products'] as List).map((i) => Product.fromJson(i)).toList() : null,
         );
     }
 

@@ -6,7 +6,7 @@ class Product {
     String name;
     int price;
 
-    Product({this.color, this.desc, this.id, this.image, this.name, this.price});
+    Product({required this.color, required this.desc, required this.id, required this.image, required this.name, required this.price});
 
     factory Product.fromJson(Map<String, dynamic> json) {
         return Product(

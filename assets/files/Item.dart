@@ -1,3 +1,5 @@
+import 'package:git_project_2/Models/Product.dart';
+
 class Item {
     List<Product> products;
 

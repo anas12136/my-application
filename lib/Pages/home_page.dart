@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
  import 'package:flutter/services.dart';
 import 'package:git_project_2/Models/catlog.dart';
+import 'package:git_project_2/Widgets/home_widgets/catlogList.dart';
+import 'package:git_project_2/Widgets/home_widgets/catlogheader.dart';
  //import 'package:git_project_2/Widgets/drawer.dart';
 // import 'package:git_project_2/Widgets/item_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -26,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
   loadData()async{
-await Future.delayed(Duration (seconds: 2));
+  await Future.delayed(Duration (seconds: 2));
 
 
   final catlogJson =  await rootBundle.loadString("assets/files/catlog.json");
@@ -55,9 +57,9 @@ await Future.delayed(Duration (seconds: 2));
               if(CatlogModel.items!=null && CatlogModel.items.isNotEmpty)
                 CatlogList().expand()
               else
-                Center(child:
-                CircularProgressIndicator(),
-    )
+
+                CircularProgressIndicator().centered().expand(),
+
 
             ],
   ),
@@ -68,59 +70,5 @@ await Future.delayed(Duration (seconds: 2));
 
   }
 }
-class CatlogList extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-
-    return ListView.builder(
-      shrinkWrap: true,
-
-      itemCount: CatlogModel.items.length,
-      itemBuilder:(context, index) {
-        final catlog = CatlogModel.items[index];
-        return CatlogItem(catlog: catlog);
-      },
-    );
-  }
-}
-class CatlogItem extends StatelessWidget{
-  final Item catlog;
-
-  const CatlogItem({Key? key, required this.catlog}) :assert(catlog!=null), super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-
-    return VxBox(
-      child: Row(
-        children: [
-          Image.network(catlog.image).box.roundedLg.color(Colors.grey).py32.make().p16().w32(context),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              catlog.name.text.lg.color(Colors.black).bold.make(),
-              catlog.desc.text.make()
-            ],
-          ))
-        ],
-
-      ),
-    ).white.roundedLg.square(120).make().py32();
-  }
-}
-class CatlogHeader extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-     children: [
-       "CatlogApp".text.xl5.bold.color(Colors.blue).make(),
-       "Trending Products".text.xl2.color(Colors.black).make(),
 
 
-     ],
-
-    );
-  }
-}

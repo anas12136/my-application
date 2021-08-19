@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MyTheme{
   static ThemeData lightTheme(BuildContext context) => ThemeData(
@@ -13,7 +14,9 @@ class MyTheme{
 
 
       ));
-  static ThemeData darkTheme(BuildContext context) =>ThemeData(brightness: Brightness.dark);
+
+static Color creamColor = Color(0xfff5f5f5);
+  static Color darkcreamColor = Vx.gray800;
 
 
 

@@ -14,6 +14,7 @@ class CatlogList extends StatelessWidget{
     return ListView.builder(
       shrinkWrap: true,
 
+      //itemCount: CatlogModel.items.length,
       itemCount: CatlogModel.items.length,
       itemBuilder:(context, index) {
         final catlog = CatlogModel.items[index];

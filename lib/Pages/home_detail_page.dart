@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:git_project_2/Models/catlog.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter/src/painting/text_style.dart';
 
 class HomeDetailPage extends StatelessWidget{
   final Item catlog;
@@ -9,7 +11,9 @@ class HomeDetailPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent
+      ),
       bottomNavigationBar: Container(
         color: Colors.white,
         child: ButtonBar(
@@ -27,8 +31,8 @@ class HomeDetailPage extends StatelessWidget{
 
               ),
               child:
-              "Buy".text.make(),
-            ).wh(100, 50)
+              "Add to Cart".text.make(),
+            ).wh(120, 50)
 
 
           ],
@@ -53,13 +57,18 @@ class HomeDetailPage extends StatelessWidget{
                   child: Container(
               color: Colors.white,
             width: context.screenWidth,
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
 
-              children:[
-                catlog.name.text.xl4.color(Colors.black).bold.make(),
-                catlog.desc.text.lg.color(Colors.grey.shade500).make(),
-                10.heightBox,]
-            ).py64(),
+                children:[
+                  catlog.name.text.xl4.color(Colors.black).bold.make(),
+                  catlog.desc.text.lg.color(Colors.grey.shade500).make(),
+                  10.heightBox,
+                  "To secure a challenging position in a reputable organization to expand my learnings, knowledge, and skills.Secure a responsible career opportunity to fully utilize my training and skills, while making a significant contribution to the success of the company.Secure a responsible career opportunity to fully utilize my training and skills, while making a significant contribution to the success of the company.".text.make().p16()
+                ],
+
+              ).py64(),
+            ),
                   ),
                 ))
           ],

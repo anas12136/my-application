@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:git_project_2/Models/catlog.dart';
 import 'package:git_project_2/Widgets/home_widgets/catlogList.dart';
 import 'package:git_project_2/Widgets/home_widgets/catlogheader.dart';
+import 'package:git_project_2/utills/routes.dart';
  //import 'package:git_project_2/Widgets/drawer.dart';
 // import 'package:git_project_2/Widgets/item_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -46,7 +47,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey,
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.pushNamed(context, MyRoutes.cartRoute);
+      },
+        backgroundColor: Colors.brown,
+        child: Icon(CupertinoIcons.cart),),
+
       body: SafeArea(
         child: Container(
           padding: Vx.m32,

@@ -37,7 +37,7 @@ class CatlogItem extends StatelessWidget{
 
                             ),
                             child:
-                            "Buy".text.make(),
+                            "Add to cart".text.make(),
                           )
 
 

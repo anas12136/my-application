@@ -1,8 +1,12 @@
 
 import 'package:git_project_2/Models/catlog.dart';
+import 'package:git_project_2/Models/cart.dart';
 
-class CatlogModel {
-  CatlogModel _catlog;
+class CartModel {
+  static final cartModel = CartModel._internal();
+  CartModel._internal();
+  factory CartModel()=> cartModel;
+  late CatlogModel _catlog;
 
   //collection of IDs - store Ids of each item
 final List<int> _itemIds = [];
@@ -10,7 +14,7 @@ final List<int> _itemIds = [];
 //Get Catlog
 CatlogModel get catlog => _catlog;
 set catlog (CatlogModel newCatlog){
-  assert(newCatlog!=null);
+  assert(newCatlog != null);
   _catlog = newCatlog;
 }
 //Get items in the cart
@@ -27,4 +31,6 @@ void add (Item item){
 void remove (Item item){
   _itemIds.remove(item.id);
 }
+
+
 }

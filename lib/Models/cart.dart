@@ -1,6 +1,8 @@
 
 import 'package:git_project_2/Models/catlog.dart';
 import 'package:git_project_2/Models/cart.dart';
+import 'package:git_project_2/core/store.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CartModel {
   static final cartModel = CartModel._internal();
@@ -34,3 +36,29 @@ void remove (Item item){
 
 
 }
+class AddMutation extends VxMutation<MyStore>{
+  final Item item;
+  AddMutation(this.item);
+
+  @override
+
+  perform() {
+    store!.cart._itemIds.add(item.id);
+
+
+  }
+
+}
+// class RemoveMutation extends VxMutation<MyStore>{
+//   final Item item;
+//   RemoveMutation(this.item);
+//   @override
+//
+//   perform() {
+//     store!.cart._itemIds.add(item.id);
+//
+//     store!.cart._itemIds.remove(item.id);
+//
+//   }
+//
+// }
